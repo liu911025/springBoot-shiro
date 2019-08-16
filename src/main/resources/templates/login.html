@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="/js/jquery-3.4.1.js"></script>
+    <title>登录</title>
+<body>
+    <h1>用户登录</h1>
+    <hr/>
+    <form id="form" action="/login" method="post">
+        <table>
+            <tr>
+                <td>用户名</td>
+                <td>
+                    <input id="username" type="text" name="userName" placeholder="请输入账户名"/>
+                </td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td>
+                    <input id="password" type="password" name="passWord" placeholder="请输入密码"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="登录"/>
+                    <input type="reset" value="重置"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+    <script type="text/javascript">
+        /*function login() {
+            alert(123);
+            $.ajax({
+                url:"/user",
+                type:"POST",
+                data:JSON.stringify($('#loginForm').serializeArray()),
+                contentType:"application/json",  //缺失会出现URL编码，无法转成json对象
+                success:function(){
+                    alert("成功");
+                }
+            });
+        }*/
+    </script>
+
+</head>
+</html>
