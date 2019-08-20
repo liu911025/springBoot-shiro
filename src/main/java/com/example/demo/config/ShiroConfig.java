@@ -25,8 +25,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
-        // 未授权界面; ----这个配置了没卵用，具体原因想深入了解的可以自行百度
-        //shiroFilterFactoryBean.setUnauthorizedUrl("/auth/403");
+        // 未授权界面;
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
         //自定义拦截器
         Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
         //限制同一帐号同时在线的个数。
@@ -39,8 +39,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/admin", "roles[admin]");
         //filterChainDefinitionMap.put("/kickout", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "user");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

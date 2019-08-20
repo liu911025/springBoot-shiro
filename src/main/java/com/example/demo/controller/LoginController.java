@@ -42,4 +42,14 @@ public class LoginController {
 
         return "index";
     }
+
+    @GetMapping("admin")
+    public String admin() {
+        return "admin";
+    }
+
+    @GetMapping("unauthorized")
+    public String unauthorized() {
+        return "unauthorized";
+    }
 }

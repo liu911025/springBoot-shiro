@@ -4,4 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
+    <resultMap id="userMap" type="com.example.demo.vo.UserVo">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <collection property="roles" column="id" select="findRoleByUserId"></collection>
+    </resultMap>
+
+    <resultMap id="roleMap" type="com.example.demo.vo.RoleVo">
+        <id property="rid" column="rid" />
+        <result property="rname" column="rname" />
+        <result property="rdesc" column="rdesc" />
+        <collection property="resourcesVos" column="rid" select="findResourceByRoleId"></collection>
+    </resultMap>
+
+    <resultMap id="resourcesMap" type="com.example.demo.vo.ResourcesVo">
+        <id property="reid" column="reid" />
+        <result property="rename" column="re_name"/>
+        <result property="url" column="url" />
+    </resultMap>
+
+    <select id="findUserByName" resultMap="userMap" parameterType="string">
+        select u.id, u.user_name username, u.pass_word password from user u where user_name=#{name}
+    </select>
+
+    <select id="findRoleByUserId" resultMap="roleMap" parameterType="integer">
+        	SELECT r.id rid, r.role_desc rdesc, r.role_name rname from role r LEFT JOIN user_role ur ON r.id=ur.user_id WHERE ur.user_id=#{id}
+    </select>
+    
+    <select id="findResourceByRoleId" resultMap="resourcesMap" parameterType="integer">
+        	SELECT re.id reid, re.user_name re_name, re.res_url url FROM resources re LEFT JOIN role_resources rr ON re.id=rr.resources_id WHERE rr.role_id=#{roleId}
+    </select>
 </mapper>
